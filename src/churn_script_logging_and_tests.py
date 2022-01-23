@@ -31,6 +31,9 @@ def test_eda(perform_eda):
 	'''
 	test perform eda function
 	'''
+	# try:
+	# 	perform_eda
+	# except
 
 
 def test_encoder_helper(encoder_helper):

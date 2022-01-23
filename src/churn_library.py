@@ -1,6 +1,3 @@
-# library doc string
-
-
 # import libraries
 import os
 import logging
@@ -17,7 +14,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import plot_roc_curve, classification_report
-os.environ['QT_QPA_PLATFORM']='offscreen'
+#os.environ['QT_QPA_PLATFORM']='offscreen'
 
 # Set logging 
 logging.basicConfig(
@@ -58,26 +55,35 @@ def perform_eda(df):
     
     df['Churn'] = df['Attrition_Flag'].apply(lambda val: 0 if val == "Existing Customer" else 1)
     
+    logging.info("Customer Churn plot is pending creation")
     plt.figure(figsize=(20,10)) 
     df['Churn'].hist()
     plt.savefig('./images/eda/Churn.png')
+    logging.info("SUCCESS: Customer Churn plot has been created and saved!")
 
+    logging.info("Customer Age plot is pending creation")
     plt.figure(figsize=(20,10)) 
     df['Customer_Age'].hist()
     plt.savefig('./images/eda/Customer_Age.png')
+    logging.info("SUCCESS: Customer Age plot has been created and saved!")
 
+    logging.info("Marital Status plot is pending creation")
     plt.figure(figsize=(20,10)) 
     df.Marital_Status.value_counts('normalize').plot(kind='bar')
     plt.savefig('./images/eda/Marital_Status.png')
-    
+    logging.info("SUCCESS: Marital Status plot has been created and saved!")
+
+    logging.info("Total Transaction Count plot is pending creation")    
     plt.figure(figsize=(20,10)) 
-    sns.distplot(df['Total_Trans_Ct']);
+    sns.distplot(df['Total_Trans_Ct'])
     plt.savefig('./images/eda/Total_Trans_Ct.png')
-    
+    logging.info("SUCCESS: Total Transaction Count has been created and saved!")
+
+    logging.info("Data Heatmap plot is pending creation")
     plt.figure(figsize=(20,10)) 
     sns.heatmap(df.corr(), annot=False, cmap='Dark2_r', linewidths = 2)
     plt.savefig('./images/eda/Data_Heatmap.png')
-    
+    logging.info("SUCCESS: Data Heatmap plot has been created and saved!")
 
 def encoder_helper(df, category_lst, response="Churn"):
     '''
@@ -92,7 +98,7 @@ def encoder_helper(df, category_lst, response="Churn"):
     output:
             df: pandas dataframe with new columns for
     '''
-    
+    logging.info("Turning cateogrical columns into new columns proportional of churn of each category")
     for category in category_lst:
         category_lst = []
         category_groups = df.groupby(category).mean()['Churn']
@@ -102,8 +108,10 @@ def encoder_helper(df, category_lst, response="Churn"):
 
         df['{}_{}'.format(category,response)] = category_lst    
     new_columns_df = df
+    logging.info("SUCCESS: Cateogrial columns created!")
     return new_columns_df
-        
+
+
 def perform_feature_engineering(df, response=None):
     '''
     input:
@@ -158,10 +166,10 @@ def perform_feature_engineering(df, response=None):
 
 def classification_report_image(y_train,
                                 y_test,
-                                y_train_preds_lr,
                                 y_train_preds_rf,
-                                y_test_preds_lr,
-                                y_test_preds_rf):
+                                y_test_preds_rf,
+                                y_train_preds_lr,
+                                y_test_preds_lr):
     '''
     produces classification report for training and testing results and stores report as image
     in images folder
