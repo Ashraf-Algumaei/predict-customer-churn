@@ -1,5 +1,12 @@
 '''
-Below all the libraries required libraries to run the file
+#######################################################################################
+This file contains the core functionality for project the utilizes Machine Learning
+to identify credit card customers that are most likely to churn
+
+Author: Ashraf Al Gumaei
+
+Created On: 01/28/2022
+#######################################################################################
 '''
 import logging
 from sklearn.metrics import plot_roc_curve, classification_report
@@ -80,7 +87,7 @@ def encoder_helper(df, category_lst, response="Churn"):
             variables or index y column]
 
     output:
-            df: pandas dataframe with new columns for
+            df: pandas dataframe with new columns for training
     '''
     for category in category_lst:
         category_lst = []
@@ -93,11 +100,12 @@ def encoder_helper(df, category_lst, response="Churn"):
     return df
 
 
-def perform_feature_engineering(df):
+def perform_feature_engineering(df, keep_cols):
     '''
     performs feature engineering in the dataframe
     input:
               df: pandas dataframe
+              keep_cols: columns would like to keep in the dataframe
 
     output:
               X: Initial data with kept columns
@@ -108,7 +116,7 @@ def perform_feature_engineering(df):
     '''
     # Set x and y
     x = pd.DataFrame()
-    x[constants.KEEP_COLS] = df[constants.KEEP_COLS]
+    x[keep_cols] = df[keep_cols]
     y = df['Churn']
 
     # Train test split
@@ -126,8 +134,6 @@ def train_models(x_train, x_test, y_train, y_test):
               y_train: y training data
               y_test: y testing data
     output:
-              y_train: training response values
-              y_test:  test response values
               y_train_preds_lr: training predictions from logistic regression
               y_train_preds_rf: training predictions from random forest
               y_test_preds_lr: test predictions from logistic regression
@@ -170,9 +176,9 @@ def train_models(x_train, x_test, y_train, y_test):
 
     # Export best two models
     joblib.dump(cv_rfc.best_estimator_, './models/rfc_model.pkl')
-    joblib.dump(lrc, './models/logistic_model.pkl')
+    joblib.dump(lrc, './models/lr_model.pkl')
 
-    return y_train, y_test, y_train_preds_rf, y_test_preds_rf, y_train_preds_lr, y_test_preds_lr
+    return y_train_preds_rf, y_test_preds_rf, y_train_preds_lr, y_test_preds_lr
 
 
 def classification_report_image(y_train,
@@ -211,7 +217,7 @@ def classification_report_image(y_train,
                 y_train, y_train_preds_rf)), {
             'fontsize': 10}, fontproperties='monospace')
     plt.axis('off')
-    plt.savefig('./images/results/Random_Forest.png')
+    plt.savefig('./images/results/Random_Forest_Report.png')
 
     plt.figure(figsize=(10, 5))
     plt.text(0.01, 0.4, str('Logistic Regression Train'),
@@ -229,7 +235,7 @@ def classification_report_image(y_train,
                 y_test, y_test_preds_lr)), {
             'fontsize': 10}, fontproperties='monospace')
     plt.axis('off')
-    plt.savefig('./images/results/Logistic_Regression.png')
+    plt.savefig('./images/results/Logistic_Regression_Report.png')
 
 
 def feature_importance_plot(model, x_data, output_pth):

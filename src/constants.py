@@ -1,6 +1,13 @@
 '''
+#######################################################################################
 This file contains all the constants shared across the project
+
+Author: Ashraf Al Gumaei
+
+Created On: 01/28/2022
+#######################################################################################
 '''
+
 KEEP_COLS = ['Customer_Age', 'Dependent_count', 'Months_on_book',
             'Total_Relationship_Count', 'Months_Inactive_12_mon',
             'Contacts_Count_12_mon', 'Credit_Limit', 'Total_Revolving_Bal',
@@ -8,3 +15,5 @@ KEEP_COLS = ['Customer_Age', 'Dependent_count', 'Months_on_book',
             'Total_Trans_Ct', 'Total_Ct_Chng_Q4_Q1', 'Avg_Utilization_Ratio',
             'Gender_Churn', 'Education_Level_Churn', 'Marital_Status_Churn', 
             'Income_Category_Churn', 'Card_Category_Churn']
+CATEGORY_LIST = ['Gender','Education_Level','Marital_Status','Income_Category',
+            'Card_Category']

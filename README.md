@@ -4,7 +4,7 @@
 
 ## Project Description
 This project utilizes Machine Learning to identify credit card customers that are most likely to churn. The project includes all the EDA and feature engineering required to create and train the models. Two models are exported under '/models' directory that use Random Forest Classifier and Logistic Regression. In addition, model evaluation results and scores are available under '/images/result'.  
-This project all contains complete testing and logging that can be found in 'churn_script_logging_and_tests' file.   
+This project all contains complete testing and logging that can be found in `churn_script_logging_and_tests` file.   
 
 ## Running Files
 Below are the complete steps for running the files in this project:  
@@ -12,13 +12,13 @@ Below are the complete steps for running the files in this project:
     ```
     pip install -r requirements.txt
     ```
-    You should see the libraries installing on your computer (make sure you're in the same directory as the requirements file)
+    You should see the libraries installing on your computer (make sure you're in the same directory as the requirements file to be able to downlo)
     
 2. Once you have all the libraries installed,
 
 ### Running tests:
 This project contain unit tests that confirm the correct behavior for all the functions. Below are the steps to run the test:
-1. Run the command below in the root directory of the project (ensure you have `pytest` insalled):
+1. Run the command below in the directory where `churn_script_logging_and_test.py` exists in the project (ensure you have `pytest` insalled):
     ```
     pytest
     ```
