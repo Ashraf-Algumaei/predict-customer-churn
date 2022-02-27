@@ -69,7 +69,7 @@ def test_eda(df):
 
     empty_directory = not os.listdir(f'{constants.EDA_PLOT_OUTPUT_PATH}')
     try:
-        assert bool(empty_directory) == False
+        assert bool(empty_directory) is False
     except AssertionError as err:
         logging.error(
             "Testing perform_eda:	visualization results do not exist in the folder")

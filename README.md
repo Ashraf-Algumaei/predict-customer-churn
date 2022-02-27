@@ -13,15 +13,14 @@ This project all contains complete testing and logging that can be found in `chu
     ```
     You should now see the libraries installing on your computer 
 
-## Running Files
+## Running the Project
 Once you have all the libraries installed, you can run the command below 
 1. Before starting, ensure to install all the libraries required for this project by running the command below
     ```
     pip install -r requirements.txt
     ```
     You should see the libraries installing on your computer (make sure you're in the same directory as the requirements file)
-    
-2. Once you have all the libraries installed,
+2. After the command runs, you should see all  the results / plots / model in the results directory 
 
 ## Running tests:
 This project contain unit tests that confirm the correct behavior for all the functions. Tests also include logs that otput to `/logs/churn_library.log` that contains the test resukts. Below are the steps to run the tests:
