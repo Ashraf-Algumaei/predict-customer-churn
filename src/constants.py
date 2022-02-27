@@ -17,3 +17,7 @@ KEEP_COLS = ['Customer_Age', 'Dependent_count', 'Months_on_book',
             'Income_Category_Churn', 'Card_Category_Churn']
 CATEGORY_LIST = ['Gender','Education_Level','Marital_Status','Income_Category',
             'Card_Category']
+EDA_PLOT_OUTPUT_PATH = './images/eda'
+RESULT_PLOT_OUTPUT_PATH = './images/eda'
+FEATURE_IMP_OUTPUT_PATH = './images/results'
+MODEL_OUTPUT_PATH = './models'

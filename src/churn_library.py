@@ -56,23 +56,23 @@ def perform_eda(df):
 
     plt.figure(figsize=(20, 10))
     df['Churn'].hist()
-    plt.savefig('./images/eda/Churn.png')
+    plt.savefig(f'{constants.EDA_PLOT_OUTPUT_PATH}/Churn.png')
 
     plt.figure(figsize=(20, 10))
     df['Customer_Age'].hist()
-    plt.savefig('./images/eda/Customer_Age.png')
+    plt.savefig(f'{constants.EDA_PLOT_OUTPUT_PATH}/Customer_Age.png')
 
     plt.figure(figsize=(20, 10))
     df.Marital_Status.value_counts('normalize').plot(kind='bar')
-    plt.savefig('./images/eda/Marital_Status.png')
+    plt.savefig(f'{constants.EDA_PLOT_OUTPUT_PATH}/Marital_Status.png')
 
     plt.figure(figsize=(20, 10))
     sns.distplot(df['Total_Trans_Ct'])
-    plt.savefig('./images/eda/Total_Trans_Ct.png')
+    plt.savefig(f'{constants.EDA_PLOT_OUTPUT_PATH}/Total_Trans_Ct.png')
 
     plt.figure(figsize=(20, 18))
     sns.heatmap(df.corr(), annot=False, cmap='Dark2_r', linewidths=2)
-    plt.savefig('./images/eda/Data_Heatmap.png')
+    plt.savefig(f'{constants.EDA_PLOT_OUTPUT_PATH}/Data_Heatmap.png')
 
 
 def encoder_helper(df, category_lst, response="Churn"):
@@ -172,11 +172,11 @@ def train_models(x_train, x_test, y_train, y_test):
         ax=ax,
         alpha=0.8)
     lrc_plot.plot(ax=ax, alpha=0.8)
-    plt.savefig('./images/results/ROC_curves.png')
+    plt.savefig(f'{constants.RESULT_PLOT_OUTPUT_PATH}/ROC_curves.png')
 
     # Export best two models
-    joblib.dump(cv_rfc.best_estimator_, './models/rfc_model.pkl')
-    joblib.dump(lrc, './models/lr_model.pkl')
+    joblib.dump(cv_rfc.best_estimator_, f'{constants.MODEL_OUTPUT_PATH}/rfc_model.pkl')
+    joblib.dump(lrc, f'{constants.MODEL_OUTPUT_PATH}/lr_model.pkl')
 
     return y_train_preds_rf, y_test_preds_rf, y_train_preds_lr, y_test_preds_lr
 
@@ -217,7 +217,7 @@ def classification_report_image(y_train,
                 y_train, y_train_preds_rf)), {
             'fontsize': 10}, fontproperties='monospace')
     plt.axis('off')
-    plt.savefig('./images/results/Random_Forest_Report.png')
+    plt.savefig(f'{constants.RESULT_PLOT_OUTPUT_PATH}/Random_Forest_Report.png')
 
     plt.figure(figsize=(10, 5))
     plt.text(0.01, 0.4, str('Logistic Regression Train'),
@@ -235,7 +235,7 @@ def classification_report_image(y_train,
                 y_test, y_test_preds_lr)), {
             'fontsize': 10}, fontproperties='monospace')
     plt.axis('off')
-    plt.savefig('./images/results/Logistic_Regression_Report.png')
+    plt.savefig(f'{constants.RESULT_PLOT_OUTPUT_PATH}/Logistic_Regression_Report.png')
 
 
 def feature_importance_plot(model, x_data, output_pth):

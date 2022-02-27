@@ -67,7 +67,7 @@ def test_eda(df):
         logging.error("Testing perform_eda: Error running the function")
         raise e
 
-    empty_directory = not os.listdir('./images/eda')
+    empty_directory = not os.listdir(f'{constants.EDA_PLOT_OUTPUT_PATH}')
     try:
         assert bool(empty_directory) == False
     except AssertionError as err:
@@ -135,8 +135,8 @@ def test_train_models(df):
         logging.error("Testing train_models: Error running the function")
         raise e
 
-    rfc_model_exists = exists('./models/rfc_model.pkl')
-    lr_model_exists = exists('./models/lr_model.pkl')
+    rfc_model_exists = exists(f'{constants.MODEL_OUTPUT_PATH}/rfc_model.pkl')
+    lr_model_exists = exists(f'{constants.MODEL_OUTPUT_PATH}/lr_model.pkl')
     try:
         assert bool(rfc_model_exists)
         assert bool(lr_model_exists)
@@ -169,9 +169,9 @@ def test_classification_report_image(df):
             "Testing classification_report_image: Error running the function")
         raise e
 
-    rf_report_exists = exists('./images/results/Random_Forest_Report.png')
+    rf_report_exists = exists(f'{constants.RESULT_PLOT_OUTPUT_PATH}/Random_Forest_Report.png')
     lr_report_exists = exists(
-        './images/results/Logistic_Regression_Report.png')
+        f'{constants.RESULT_PLOT_OUTPUT_PATH}/Logistic_Regression_Report.png')
     try:
         assert bool(rf_report_exists)
         assert bool(lr_report_exists)
@@ -188,7 +188,7 @@ def test_feature_importance_plot(df):
     plot_output_pth = "./images/results/Feature_Importances.png"
     encoded_df = encoder_helper(df, constants.CATEGORY_LIST)
     x = perform_feature_engineering(encoded_df, constants.KEEP_COLS)[0]
-    rfc_model = joblib.load('./models/rfc_model.pkl')
+    rfc_model = joblib.load(f'{constants.MODEL_OUTPUT_PATH}/rfc_model.pkl')
     try:
         feature_importance_plot(rfc_model, x, plot_output_pth)
         logging.info("Testing feature_importance_plot: SUCCESS")
@@ -198,7 +198,7 @@ def test_feature_importance_plot(df):
         raise e
 
     feature_importance_plot_exists = exists(
-        './images/results/Feature_Importances.png')
+        f'{constants.FEATURE_IMP_OUTPUT_PATH}/Feature_Importances.png')
     try:
         assert bool(feature_importance_plot_exists)
     except AssertionError as err:

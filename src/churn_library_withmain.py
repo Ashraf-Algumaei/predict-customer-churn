@@ -267,7 +267,7 @@ def feature_importance_plot(model, x_data, output_pth):
     plt.xticks(range(x_data.shape[1]), names, rotation=90)
 
     # Saves plot in output_pth
-    plt.savefig(output_pth)
+    plt.savefig(f'{constants.FEATURE_IMP_OUTPUT_PATH}/Feature_Importances.png')
 
 
 

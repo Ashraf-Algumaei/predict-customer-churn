@@ -132,3 +132,4 @@ src/images/.DS_Store
 .DS_Store
 *.pkl
 *.png
+src/churn_library_withmain.py
