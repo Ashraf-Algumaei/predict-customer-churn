@@ -8,7 +8,6 @@ Author: Ashraf Al Gumaei
 Created On: 01/28/2022
 #######################################################################################
 '''
-import logging
 from sklearn.metrics import plot_roc_curve, classification_report
 from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
@@ -20,8 +19,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import constants
-sns.set()
-# os.environ['QT_QPA_PLATFORM']='offscreen'
 
 
 def import_data(pth):
@@ -35,10 +32,8 @@ def import_data(pth):
     '''
     try:
         df = pd.read_csv(pth)
-        logging.info("SUCCESS: Your file has been loaded")
         return df
     except FileNotFoundError:
-        logging.warning("ERROR: File was not found")
         return -1
 
 

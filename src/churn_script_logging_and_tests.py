@@ -16,7 +16,7 @@ import pytest
 import pandas as pd
 import constants
 from churn_library import *
-
+#os.environ['QT_QPA_PLATFORM']='offscreen'
 
 logging.basicConfig(
     filename='./logs/churn_library.log',
@@ -42,7 +42,7 @@ def test_import():
     '''
     try:
         df = import_data("./data/bank_data.csv")
-        logging.info("Testing import_data: SUCCESS")
+        logging.info("SUCCESS: Your file has been loaded")
     except FileNotFoundError as err:
         logging.error("Testing import_eda: The file wasn't found")
         raise err
@@ -72,7 +72,7 @@ def test_eda(df):
         assert bool(empty_directory) is False
     except AssertionError as err:
         logging.error(
-            "Testing perform_eda:	visualization results do not exist in the folder")
+            "Testing perform_eda: visualization results do not exist in the folder")
         raise err
 
 
@@ -208,4 +208,13 @@ def test_feature_importance_plot(df):
 
 
 if __name__ == "__main__":
-    pass
+    # global variable used for testing
+    df = pd.read_csv("./data/bank_data.csv")
+    test_import()
+    test_eda(df)
+    test_encoder_helper(df)
+    test_perform_feature_engineering(df)
+    test_train_models(df)
+    test_classification_report_image(df)
+    test_feature_importance_plot(df)
+    
